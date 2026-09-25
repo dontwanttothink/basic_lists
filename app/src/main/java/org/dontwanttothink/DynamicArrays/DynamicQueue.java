@@ -22,7 +22,6 @@ public class DynamicQueue<T> implements MyQueue<T> {
 
 		buffer[(start + length) % buffer.length] = x;
 		++length;
-		length %= buffer.length;
 	}
 
 	@Override
@@ -32,13 +31,14 @@ public class DynamicQueue<T> implements MyQueue<T> {
 		}
 
 		T out = buffer[start];
+		buffer[start] = null;
 
 		++start;
 		start %= buffer.length;
 
 		--length;
 
-		if (length <= buffer.length / 4) {
+		if (length < buffer.length / 4) {
 			shrinkBuffer();
 		}
 
@@ -51,7 +51,7 @@ public class DynamicQueue<T> implements MyQueue<T> {
 			throw new NoSuchElementException();
 		}
 
-		return buffer[(start + length) % buffer.length];
+		return buffer[start];
 	}
 
 	@Override
@@ -71,26 +71,25 @@ public class DynamicQueue<T> implements MyQueue<T> {
 	@Override
 	public void delete(T n) {
 		for (int i = 0; i < length; ++i) {
-			int index = (start + i) % length;
-			T item = buffer[index];
+			T item = buffer[(start + i) % buffer.length];
 			if (item == null ? n == null : item.equals(n)) {
-				int firstChunk = Math.min(buffer.length - start, length);
-				if (i < firstChunk) {
-					System.arraycopy(buffer, index + 1, buffer, index, buffer.length - (i + 1));
-					buffer[0] = buffer[length - 1];
-					System.arraycopy(buffer, 1, buffer, 0, length - firstChunk);
-				} else {
-					System.arraycopy(buffer, index + 1, buffer, index, length - firstChunk);
-				}
-
-				--length;
-
-				if (length <= buffer.length / 4) {
-					shrinkBuffer();
-				}
-
+				deleteIndex(i);
 				return;
 			}
+		}
+		throw new NoSuchElementException();
+	}
+
+	private void deleteIndex(int i) {
+		for (int j = i; j + 1 < length; ++j) {
+			buffer[(start + j) % buffer.length] = buffer[(start + j + 1) % buffer.length];
+		}
+
+		buffer[(start + length - 1) % buffer.length] = null;
+		--length;
+
+		if (length < buffer.length / 4) {
+			shrinkBuffer();
 		}
 	}
 
