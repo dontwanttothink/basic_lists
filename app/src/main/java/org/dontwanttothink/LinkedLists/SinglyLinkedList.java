@@ -36,10 +36,6 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 		current.next = node;
 	}
 
-	/**
-	 * El comportamiento está indefinido si `node` es null o si no es parte de la
-	 * lista.
-	 */
 	public SinglyLinkedNode<T> find(T datum) {
 		SinglyLinkedNode<T> current = head;
 		while (current != null && (current.datum == null ? datum != null : !current.datum.equals(datum))) {
