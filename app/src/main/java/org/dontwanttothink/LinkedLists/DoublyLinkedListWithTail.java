@@ -1,5 +1,7 @@
 package org.dontwanttothink.LinkedLists;
 
+import java.util.NoSuchElementException;
+
 public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T>> {
 	// voy a usar un centinela porque si no mi cerebro se derrite.
 	// el centinela sirve de cabeza y cola.
@@ -24,7 +26,7 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 	@Override
 	public T popFront() {
 		if (isEmpty()) {
-			return null;
+			throw new NoSuchElementException();
 		}
 
 		T out = sentinel.next.datum;
@@ -35,7 +37,7 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 	@Override
 	public T popBack() {
 		if (isEmpty()) {
-			return null;
+			throw new NoSuchElementException();
 		}
 
 		T out = sentinel.previous.datum;
@@ -54,7 +56,7 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 			current = current.next;
 		}
 
-		return null;
+		throw new NoSuchElementException();
 	}
 
 	@Override

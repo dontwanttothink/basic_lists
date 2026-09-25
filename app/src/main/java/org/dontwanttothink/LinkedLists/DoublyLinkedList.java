@@ -1,5 +1,7 @@
 package org.dontwanttothink.LinkedLists;
 
+import java.util.NoSuchElementException;
+
 public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 	DoublyLinkedNode<T> head;
 
@@ -38,7 +40,7 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 	@Override
 	public T popFront() {
 		if (head == null) {
-			return null;
+			throw new NoSuchElementException();
 		}
 
 		T out = head.datum;
@@ -49,7 +51,7 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 	@Override
 	public T popBack() {
 		if (isEmpty()) {
-			return null;
+			throw new NoSuchElementException();
 		}
 
 		DoublyLinkedNode<T> last = head;
@@ -73,7 +75,7 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 			current = current.next;
 		}
 
-		return null;
+		throw new NoSuchElementException();
 	}
 
 	/**

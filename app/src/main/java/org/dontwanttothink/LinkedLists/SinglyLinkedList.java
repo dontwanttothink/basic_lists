@@ -1,5 +1,7 @@
 package org.dontwanttothink.LinkedLists;
 
+import java.util.NoSuchElementException;
+
 public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 	SinglyLinkedNode<T> head;
 
@@ -40,6 +42,10 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 		SinglyLinkedNode<T> current = head;
 		while (current != null && (current.datum == null ? datum != null : !current.datum.equals(datum))) {
 			current = current.next;
+		}
+
+		if (current == null) {
+			throw new NoSuchElementException();
 		}
 		return current;
 	}
@@ -100,7 +106,7 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 
 	public T popFront() {
 		if (head == null) {
-			return null;
+			throw new NoSuchElementException();
 		}
 
 		T out = head.datum;
@@ -110,7 +116,7 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 
 	public T popBack() {
 		if (isEmpty()) {
-			return null;
+			throw new NoSuchElementException();
 		}
 
 		SinglyLinkedNode<T> current = head;
