@@ -2,7 +2,7 @@ package example.dontwanttothink.DynamicArrays;
 
 import java.util.NoSuchElementException;
 
-public class DynamicQueue<T> implements MyQueue<T> {
+public final class DynamicQueue<T> implements MyQueue<T> {
 	private T[] buffer;
 	private int start = 0;
 	private int length = 0;

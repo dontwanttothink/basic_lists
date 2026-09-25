@@ -2,11 +2,11 @@ package example.dontwanttothink.LinkedLists;
 
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T>> {
+public final class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T>> {
 	// voy a usar un centinela porque si no mi cerebro se derrite.
 	// el centinela sirve de cabeza y cola.
 
-	DoublyLinkedNode<T> sentinel = new DoublyLinkedNode<>();
+	private DoublyLinkedNode<T> sentinel = new DoublyLinkedNode<>();
 
 	public DoublyLinkedListWithTail() {
 		sentinel.next = sentinel;

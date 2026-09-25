@@ -2,9 +2,9 @@ package example.dontwanttothink.LinkedLists;
 
 import java.util.NoSuchElementException;
 
-public class SinglyLinkedListWithTail<T> implements MyList<T, SinglyLinkedNode<T>> {
-	SinglyLinkedNode<T> head;
-	SinglyLinkedNode<T> tail;
+public final class SinglyLinkedListWithTail<T> implements MyList<T, SinglyLinkedNode<T>> {
+	private SinglyLinkedNode<T> head;
+	private SinglyLinkedNode<T> tail;
 
 	public boolean isEmpty() {
 		return head == null;

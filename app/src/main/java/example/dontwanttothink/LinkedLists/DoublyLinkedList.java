@@ -2,8 +2,8 @@ package example.dontwanttothink.LinkedLists;
 
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
-	DoublyLinkedNode<T> head;
+public final class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
+	private DoublyLinkedNode<T> head;
 
 	@Override
 	public void pushFront(T x) {

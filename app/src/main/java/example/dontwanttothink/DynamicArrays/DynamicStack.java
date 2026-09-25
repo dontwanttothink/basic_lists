@@ -2,9 +2,9 @@ package example.dontwanttothink.DynamicArrays;
 
 import java.util.NoSuchElementException;
 
-public class DynamicStack<T> implements MyStack<T> {
+public final class DynamicStack<T> implements MyStack<T> {
 	private T[] buffer;
-	int length = 0;
+	private int length = 0;
 
 	final private static int INITIAL_CAPACITY = 2;
 
