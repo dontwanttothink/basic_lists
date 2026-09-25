@@ -19,7 +19,6 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
-    implementation("org.jspecify:jspecify:1.0.0")
 }
 
 testing {

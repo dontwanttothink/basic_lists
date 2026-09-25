@@ -1,4 +1,4 @@
-package org.dontwanttothink.Queue;
+package org.dontwanttothink.DynamicArrays;
 
 public interface MyQueue<T> {
 	void enqueue(T x);

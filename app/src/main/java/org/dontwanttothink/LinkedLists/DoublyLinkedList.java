@@ -1,7 +1,5 @@
 package org.dontwanttothink.LinkedLists;
 
-import org.jspecify.annotations.Nullable;
-
 public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 	DoublyLinkedNode<T> head;
 
@@ -38,9 +36,8 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 	}
 
 	@Override
-	@Nullable
 	public T popFront() {
-		if (isEmpty()) {
+		if (head == null) {
 			return null;
 		}
 
@@ -50,7 +47,6 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 	}
 
 	@Override
-	@Nullable
 	public T popBack() {
 		if (isEmpty()) {
 			return null;
@@ -67,12 +63,10 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 	}
 
 	@Override
-	@Nullable
 	public DoublyLinkedNode<T> find(T datum) {
 		DoublyLinkedNode<T> current = head;
 		while (current != null) {
-			assert current.datum != null;
-			if (current.datum.equals(datum)) {
+			if (current.datum == null ? datum == null : current.datum.equals(datum)) {
 				return current;
 			}
 
@@ -82,10 +76,14 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 		return null;
 	}
 
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	@Override
-	public boolean erase(DoublyLinkedNode<T> node) {
+	public void erase(DoublyLinkedNode<T> node) {
 		if (isEmpty()) {
-			return false;
+			return;
 		}
 
 		if (node == head) {
@@ -96,19 +94,50 @@ public class DoublyLinkedList<T> implements MyList<T, DoublyLinkedNode<T>> {
 			}
 		} else {
 			node.previous.next = node.next;
-			node.next.previous = node.previous;
+
+			if (node.next != null) {
+				node.next.previous = node.previous;
+			}
 		}
-		return true;
 	}
 
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	@Override
 	public void addBefore(DoublyLinkedNode<T> node, T datum) {
-		oaisdjfoiajdsf
+		DoublyLinkedNode<T> novel = new DoublyLinkedNode<>();
+		novel.datum = datum;
+
+		novel.next = node;
+
+		if (node == head) {
+			node.previous = novel;
+			head = novel;
+		} else {
+			novel.previous = node.previous;
+			novel.next.previous = novel;
+			novel.previous.next = novel;
+		}
 	}
 
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	@Override
 	public void addAfter(DoublyLinkedNode<T> node, T datum) {
-		oaijsdfoiajsdiojf
+		DoublyLinkedNode<T> novel = new DoublyLinkedNode<>();
+		novel.datum = datum;
+
+		novel.previous = node;
+		novel.next = node.next;
+
+		if (novel.next != null) {
+			novel.next.previous = novel;
+		}
+		novel.previous.next = novel;
 	}
 
 	@Override

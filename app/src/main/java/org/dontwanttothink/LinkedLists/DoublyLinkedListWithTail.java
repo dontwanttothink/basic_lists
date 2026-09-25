@@ -1,14 +1,12 @@
 package org.dontwanttothink.LinkedLists;
 
-import org.jspecify.annotations.Nullable;
-
 public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T>> {
 	// voy a usar un centinela porque si no mi cerebro se derrite.
 	// el centinela sirve de cabeza y cola.
 
 	DoublyLinkedNode<T> sentinel = new DoublyLinkedNode<>();
 
-	DoublyLinkedListWithTail() {
+	public DoublyLinkedListWithTail() {
 		sentinel.next = sentinel;
 		sentinel.previous = sentinel;
 	}
@@ -24,7 +22,6 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 	}
 
 	@Override
-	@Nullable
 	public T popFront() {
 		if (isEmpty()) {
 			return null;
@@ -36,7 +33,6 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 	}
 
 	@Override
-	@Nullable
 	public T popBack() {
 		if (isEmpty()) {
 			return null;
@@ -48,12 +44,10 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 	}
 
 	@Override
-	@Nullable
 	public DoublyLinkedNode<T> find(T datum) {
 		DoublyLinkedNode<T> current = sentinel.next;
 		while (current != sentinel) {
-			assert current.datum != null;
-			if (current.datum.equals(datum)) {
+			if (current.datum == null ? datum == null : current.datum.equals(datum)) {
 				return current;
 			}
 
@@ -64,18 +58,24 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 	}
 
 	@Override
-	public boolean erase(DoublyLinkedNode<T> node) {
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
+	public void erase(DoublyLinkedNode<T> node) {
 		if (node == sentinel) {
-			throw new Error();
+			throw new IllegalArgumentException();
 		}
 
 		node.previous.next = node.next;
 		node.next.previous = node.previous;
-
-		return true;
 	}
 
 	@Override
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	public void addBefore(DoublyLinkedNode<T> node, T datum) {
 		DoublyLinkedNode<T> novel = new DoublyLinkedNode<>();
 		novel.datum = datum;
@@ -87,6 +87,10 @@ public class DoublyLinkedListWithTail<T> implements MyList<T, DoublyLinkedNode<T
 	}
 
 	@Override
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	public void addAfter(DoublyLinkedNode<T> node, T datum) {
 		addBefore(node.next, datum);
 	}

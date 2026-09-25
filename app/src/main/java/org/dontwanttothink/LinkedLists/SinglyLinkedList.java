@@ -1,7 +1,5 @@
 package org.dontwanttothink.LinkedLists;
 
-import org.jspecify.annotations.Nullable;
-
 public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 	SinglyLinkedNode<T> head;
 
@@ -38,18 +36,26 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 		current.next = node;
 	}
 
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	public SinglyLinkedNode<T> find(T datum) {
 		SinglyLinkedNode<T> current = head;
-		while (current != null && !current.datum.equals(datum)) {
+		while (current != null && (current.datum == null ? datum != null : !current.datum.equals(datum))) {
 			current = current.next;
 		}
 		return current;
 	}
 
-	public boolean erase(SinglyLinkedNode<T> node) {
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
+	public void erase(SinglyLinkedNode<T> node) {
 		if (node == head) {
 			head = node.next;
-			return true;
+			return;
 		}
 
 		SinglyLinkedNode<T> current = head;
@@ -57,14 +63,13 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 			current = current.next;
 		}
 
-		if (current == null) {
-			return false;
-		}
-
 		current.next = node.next;
-		return true;
 	}
 
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	public void addBefore(SinglyLinkedNode<T> node, T datum) {
 		SinglyLinkedNode<T> novelNode = new SinglyLinkedNode<>();
 		novelNode.datum = datum;
@@ -86,6 +91,10 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 		current.next = novelNode;
 	}
 
+	/**
+	 * El comportamiento está indefinido si `node` es null o si no es parte de la
+	 * lista.
+	 */
 	public void addAfter(SinglyLinkedNode<T> node, T datum) {
 		SinglyLinkedNode<T> novelNode = new SinglyLinkedNode<>();
 		novelNode.datum = datum;
@@ -93,7 +102,6 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 		node.next = novelNode;
 	}
 
-	@Nullable
 	public T popFront() {
 		if (head == null) {
 			return null;
@@ -104,7 +112,6 @@ public class SinglyLinkedList<T> implements MyList<T, SinglyLinkedNode<T>> {
 		return out;
 	}
 
-	@Nullable
 	public T popBack() {
 		if (isEmpty()) {
 			return null;
