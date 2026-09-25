@@ -1,4 +1,4 @@
-package org.dontwanttothink.DynamicArrays;
+package example.dontwanttothink.DynamicArrays;
 
 public interface MyStack<T> {
 	void push(T x);

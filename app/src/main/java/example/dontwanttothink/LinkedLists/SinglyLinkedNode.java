@@ -1,4 +1,4 @@
-package org.dontwanttothink.LinkedLists;
+package example.dontwanttothink.LinkedLists;
 
 public class SinglyLinkedNode<T> {
 	SinglyLinkedNode<T> next;

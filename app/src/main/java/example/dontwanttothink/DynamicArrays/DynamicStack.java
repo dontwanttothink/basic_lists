@@ -1,4 +1,4 @@
-package org.dontwanttothink.DynamicArrays;
+package example.dontwanttothink.DynamicArrays;
 
 import java.util.NoSuchElementException;
 

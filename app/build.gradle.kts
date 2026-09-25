@@ -40,5 +40,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.dontwanttothink.App"
+    mainClass = "example.dontwanttothink.App"
 }

@@ -1,4 +1,4 @@
-package org.dontwanttothink.LinkedLists;
+package example.dontwanttothink.LinkedLists;
 
 public interface MyList<T, N> {
 	void pushFront(T x);

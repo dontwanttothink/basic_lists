@@ -1,4 +1,4 @@
-package org.dontwanttothink.LinkedLists;
+package example.dontwanttothink.LinkedLists;
 
 import java.util.NoSuchElementException;
 
