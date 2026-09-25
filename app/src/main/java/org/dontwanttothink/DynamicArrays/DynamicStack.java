@@ -30,9 +30,11 @@ public class DynamicStack<T> implements MyStack<T> {
 		}
 
 		T out = buffer[length - 1];
+		buffer[length - 1] = null;
+
 		--length;
 
-		if (length <= buffer.length / 4) {
+		if (length < buffer.length / 4) {
 			shrinkBuffer();
 		}
 
@@ -41,6 +43,9 @@ public class DynamicStack<T> implements MyStack<T> {
 
 	@Override
 	public T peek() {
+		if (isEmpty()) {
+			throw new NoSuchElementException();
+		}
 		return buffer[length - 1];
 	}
 
@@ -58,10 +63,12 @@ public class DynamicStack<T> implements MyStack<T> {
 	public void delete(T n) {
 		for (int i = 0; i < length; ++i) {
 			if (buffer[i] == null ? n == null : buffer[i].equals(n)) {
-				System.arraycopy(buffer, i, buffer, i + 1, length - (i + 1));
+				System.arraycopy(buffer, i + 1, buffer, i, length - (i + 1));
+				buffer[length - 1] = null;
+
 				--length;
 
-				if (length <= buffer.length / 4) {
+				if (length < buffer.length / 4) {
 					shrinkBuffer();
 				}
 
@@ -73,7 +80,7 @@ public class DynamicStack<T> implements MyStack<T> {
 
 	private void shrinkBuffer() {
 		@SuppressWarnings("unchecked")
-		T[] smallerBuffer = (T[]) new Object[length / 2];
+		T[] smallerBuffer = (T[]) new Object[buffer.length / 2];
 
 		System.arraycopy(buffer, 0, smallerBuffer, 0, length);
 		buffer = smallerBuffer;
@@ -81,7 +88,7 @@ public class DynamicStack<T> implements MyStack<T> {
 
 	private void growBuffer() {
 		@SuppressWarnings("unchecked")
-		T[] smallerBuffer = (T[]) new Object[length * 2];
+		T[] smallerBuffer = (T[]) new Object[buffer.length * 2];
 
 		System.arraycopy(buffer, 0, smallerBuffer, 0, length);
 		buffer = smallerBuffer;
