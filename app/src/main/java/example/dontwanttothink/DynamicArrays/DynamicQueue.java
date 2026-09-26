@@ -16,9 +16,7 @@ public final class DynamicQueue<T> implements MyQueue<T> {
 
 	@Override
 	public void enqueue(T x) {
-		if (isFull()) {
-			growBuffer();
-		}
+		growBufferIfNeeded();
 
 		buffer[(start + length) % buffer.length] = x;
 		++length;
@@ -37,10 +35,7 @@ public final class DynamicQueue<T> implements MyQueue<T> {
 		start %= buffer.length;
 
 		--length;
-
-		if (length < buffer.length / 4) {
-			shrinkBuffer();
-		}
+		shrinkBufferIfNeeded();
 
 		return out;
 	}
@@ -88,9 +83,7 @@ public final class DynamicQueue<T> implements MyQueue<T> {
 		buffer[(start + length - 1) % buffer.length] = null;
 		--length;
 
-		if (length < buffer.length / 4) {
-			shrinkBuffer();
-		}
+		shrinkBufferIfNeeded();
 	}
 
 	private void copyContiguously(T[] into) {
@@ -99,7 +92,11 @@ public final class DynamicQueue<T> implements MyQueue<T> {
 		System.arraycopy(buffer, 0, into, firstChunk, length - firstChunk);
 	}
 
-	private void shrinkBuffer() {
+	private void shrinkBufferIfNeeded() {
+		if (buffer.length == INITIAL_CAPACITY || length > buffer.length / 4) {
+			return;
+		}
+
 		@SuppressWarnings("unchecked")
 		T[] smallerBuffer = (T[]) new Object[buffer.length / 2];
 
@@ -109,7 +106,11 @@ public final class DynamicQueue<T> implements MyQueue<T> {
 		start = 0;
 	}
 
-	private void growBuffer() {
+	private void growBufferIfNeeded() {
+		if (!isFull()) {
+			return;
+		}
+
 		@SuppressWarnings("unchecked")
 		T[] biggerBuffer = (T[]) new Object[buffer.length * 2];
 

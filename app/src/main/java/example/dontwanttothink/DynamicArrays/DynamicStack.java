@@ -15,9 +15,7 @@ public final class DynamicStack<T> implements MyStack<T> {
 
 	@Override
 	public void push(T x) {
-		if (length >= buffer.length) {
-			growBuffer();
-		}
+		growBufferIfNeeded();
 
 		buffer[length] = x;
 		++length;
@@ -34,9 +32,7 @@ public final class DynamicStack<T> implements MyStack<T> {
 
 		--length;
 
-		if (length < buffer.length / 4) {
-			shrinkBuffer();
-		}
+		shrinkBufferIfNeeded();
 
 		return out;
 	}
@@ -54,6 +50,10 @@ public final class DynamicStack<T> implements MyStack<T> {
 		return length == 0;
 	}
 
+	private boolean isFull() {
+		return length == buffer.length;
+	}
+
 	@Override
 	public int size() {
 		return length;
@@ -67,10 +67,7 @@ public final class DynamicStack<T> implements MyStack<T> {
 				buffer[length - 1] = null;
 
 				--length;
-
-				if (length < buffer.length / 4) {
-					shrinkBuffer();
-				}
+				shrinkBufferIfNeeded();
 
 				return;
 			}
@@ -78,7 +75,11 @@ public final class DynamicStack<T> implements MyStack<T> {
 		throw new NoSuchElementException();
 	}
 
-	private void shrinkBuffer() {
+	private void shrinkBufferIfNeeded() {
+		if (buffer.length == INITIAL_CAPACITY || length > buffer.length / 4) {
+			return;
+		}
+
 		@SuppressWarnings("unchecked")
 		T[] smallerBuffer = (T[]) new Object[buffer.length / 2];
 
@@ -86,7 +87,11 @@ public final class DynamicStack<T> implements MyStack<T> {
 		buffer = smallerBuffer;
 	}
 
-	private void growBuffer() {
+	private void growBufferIfNeeded() {
+		if (!isFull()) {
+			return;
+		}
+
 		@SuppressWarnings("unchecked")
 		T[] smallerBuffer = (T[]) new Object[buffer.length * 2];
 
