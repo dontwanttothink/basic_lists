@@ -76,11 +76,15 @@ public final class DynamicQueue<T> implements MyQueue<T> {
 	}
 
 	private void deleteIndex(int i) {
-		for (int j = i; j + 1 < length; ++j) {
-			buffer[(start + j) % buffer.length] = buffer[(start + j + 1) % buffer.length];
+		for (int j = i; j - 1 >= 0; --j) {
+			buffer[(start + j) % buffer.length] = buffer[(start + j - 1) % buffer.length];
 		}
 
-		buffer[(start + length - 1) % buffer.length] = null;
+		buffer[start] = null;
+
+		++start;
+		start %= buffer.length;
+
 		--length;
 
 		shrinkBufferIfNeeded();
