@@ -51,8 +51,7 @@ public class App {
                     end = System.nanoTime();
                     IO.print(end - start + ",");
 
-                    int randomItem = rng.nextInt(n);
-                    tail = tail.next();
+                    int randomItem = rng.nextInt(n + 1);
 
                     // queremos quedarnos con el elemento nuevo, n
                     singlyLinkedList.pushBack(-1);
@@ -98,6 +97,8 @@ public class App {
                     } else {
                         singlyLinkedList.addAfter(singlyLinkedList.find(randomItem - 1), randomItem);
                     }
+
+                    tail = tail.next();
                 } else {
                     if (tail == null) {
                         singlyLinkedList.pushBack(n);
@@ -210,7 +211,6 @@ public class App {
                     IO.print(end - start + ",");
 
                     int randomItem = rng.nextInt(n + 1);
-                    tail = tail.next();
 
                     // queremos quedarnos con el elemento nuevo, n
                     doublyLinkedList.pushBack(-1);
@@ -256,6 +256,8 @@ public class App {
                     } else {
                         doublyLinkedList.addAfter(doublyLinkedList.find(randomItem - 1), randomItem);
                     }
+
+                    tail = tail.next();
                 } else {
                     if (tail == null) {
                         doublyLinkedList.pushBack(n);
