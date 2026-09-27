@@ -300,7 +300,7 @@ public class App {
                 start = System.nanoTime();
                 x = doublyLinkedListWithTail.popFront();
                 end = System.nanoTime();
-                IO.print(end - start);
+                IO.print(end - start + ",");
 
                 start = System.nanoTime();
                 DoublyLinkedNode<Integer> doublyLinkedNode = doublyLinkedListWithTail.find(randomItem);
