@@ -9,6 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("me.champeau.jmh") version "0.7.3"
 }
 
 repositories {
@@ -22,13 +23,7 @@ dependencies {
 }
 
 testing {
-    suites {
-        // Configure the built-in test suite
-        val test = named<JvmTestSuite>("test") {
-            // Use JUnit Jupiter test framework
-            useJUnitJupiter("6.0.1")
-        }
-    }
+    suites {}
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
