@@ -5,4 +5,12 @@ public final class DoublyLinkedNode<T> {
 	DoublyLinkedNode<T> previous;
 
 	T datum;
+
+	public T unwrap() {
+		return datum;
+	}
+
+	public DoublyLinkedNode<T> next() {
+		return next;
+	}
 }
