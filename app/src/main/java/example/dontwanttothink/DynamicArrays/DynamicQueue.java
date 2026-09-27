@@ -123,4 +123,18 @@ public final class DynamicQueue<T> implements MyQueue<T> {
 		buffer = biggerBuffer;
 		start = 0;
 	}
+
+	/**
+	 * Para las mediciones solamente.
+	 */
+	public void _addBefore(int index, T x) {
+		growBufferIfNeeded();
+
+		for (int i = length; i - 1 >= index; --i) {
+			buffer[(start + i) % buffer.length] = buffer[(start + i - 1) % buffer.length];
+		}
+
+		buffer[(start + index) % buffer.length] = x;
+		++length;
+	}
 }

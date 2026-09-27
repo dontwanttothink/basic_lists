@@ -17,8 +17,7 @@ import example.dontwanttothink.LinkedLists.SinglyLinkedNode;
 // estructura. Pero las diferencias son diminutas e insignificantes.
 
 public class App {
-    @SuppressWarnings("unused")
-    private static volatile Object x = 0;
+    public static volatile Object x = 0;
 
     private final static int MAXIMUM_N = 1 << 26;
     private final static int ITERATIONS = 3;
@@ -40,18 +39,18 @@ public class App {
             for (int n = 0; n <= MAXIMUM_N; ++n) {
                 if (isPowerOfTwo(n)) {
                     IO.println(":" + n);
-                    int randomItem = rng.nextInt(n);
 
                     start = System.nanoTime();
                     x = singlyLinkedList.isEmpty();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     singlyLinkedList.pushBack(n);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
+                    int randomItem = rng.nextInt(n);
                     tail = tail.next();
 
                     // queremos quedarnos con el elemento nuevo, n
@@ -59,39 +58,39 @@ public class App {
                     start = System.nanoTime();
                     x = singlyLinkedList.popBack();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     singlyLinkedList.pushFront(-1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     x = singlyLinkedList.popFront();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     SinglyLinkedNode<Integer> singlyLinkedNode = singlyLinkedList.find(randomItem);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     singlyLinkedList.addBefore(singlyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     singlyLinkedList.erase(singlyLinkedList.find(-1));
 
                     start = System.nanoTime();
                     singlyLinkedList.addAfter(singlyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     singlyLinkedList.erase(singlyLinkedList.find(-1));
 
                     start = System.nanoTime();
                     singlyLinkedList.erase(singlyLinkedNode);
                     end = System.nanoTime();
-                    IO.println("%d".formatted(end - start));
+                    IO.println(end - start);
 
                     if (randomItem == 0) {
                         singlyLinkedList.pushFront(0);
@@ -121,56 +120,57 @@ public class App {
             for (int n = 0; n <= MAXIMUM_N; ++n) {
                 if (isPowerOfTwo(n)) {
                     IO.println(":" + n);
-                    int randomItem = rng.nextInt(n);
 
                     start = System.nanoTime();
                     x = singlyLinkedListWithTail.isEmpty();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     singlyLinkedListWithTail.pushBack(n);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
+
+                    int randomItem = rng.nextInt(n + 1);
 
                     // queremos quedarnos con el elemento nuevo, n
                     singlyLinkedListWithTail.pushBack(-1);
                     start = System.nanoTime();
                     x = singlyLinkedListWithTail.popBack();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     singlyLinkedListWithTail.pushFront(-1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     x = singlyLinkedListWithTail.popFront();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     SinglyLinkedNode<Integer> singlyLinkedNode = singlyLinkedListWithTail.find(randomItem);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     singlyLinkedListWithTail.addBefore(singlyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     singlyLinkedListWithTail.erase(singlyLinkedListWithTail.find(-1));
 
                     start = System.nanoTime();
                     singlyLinkedListWithTail.addAfter(singlyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     singlyLinkedListWithTail.erase(singlyLinkedListWithTail.find(-1));
 
                     start = System.nanoTime();
                     singlyLinkedListWithTail.erase(singlyLinkedNode);
                     end = System.nanoTime();
-                    IO.println("%d".formatted(end - start));
+                    IO.println(end - start);
 
                     if (randomItem == 0) {
                         singlyLinkedListWithTail.pushFront(0);
@@ -197,18 +197,18 @@ public class App {
             for (int n = 0; n <= MAXIMUM_N; ++n) {
                 if (isPowerOfTwo(n)) {
                     IO.println(":" + n);
-                    int randomItem = rng.nextInt(n);
 
                     start = System.nanoTime();
                     x = doublyLinkedList.isEmpty();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     doublyLinkedList.pushBack(n);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
+                    int randomItem = rng.nextInt(n + 1);
                     tail = tail.next();
 
                     // queremos quedarnos con el elemento nuevo, n
@@ -216,39 +216,39 @@ public class App {
                     start = System.nanoTime();
                     x = doublyLinkedList.popBack();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     doublyLinkedList.pushFront(-1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     x = doublyLinkedList.popFront();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     DoublyLinkedNode<Integer> doublyLinkedNode = doublyLinkedList.find(randomItem);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     doublyLinkedList.addBefore(doublyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     doublyLinkedList.erase(doublyLinkedList.find(-1));
 
                     start = System.nanoTime();
                     doublyLinkedList.addAfter(doublyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     doublyLinkedList.erase(doublyLinkedList.find(-1));
 
                     start = System.nanoTime();
                     doublyLinkedList.erase(doublyLinkedNode);
                     end = System.nanoTime();
-                    IO.println("%d".formatted(end - start));
+                    IO.println(end - start);
 
                     if (randomItem == 0) {
                         doublyLinkedList.pushFront(0);
@@ -278,56 +278,57 @@ public class App {
             for (int n = 0; n <= MAXIMUM_N; ++n) {
                 if (isPowerOfTwo(n)) {
                     IO.println(":" + n);
-                    int randomItem = rng.nextInt(n);
 
                     start = System.nanoTime();
                     x = doublyLinkedListWithTail.isEmpty();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     doublyLinkedListWithTail.pushBack(n);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
+
+                    int randomItem = rng.nextInt(n + 1);
 
                     // queremos quedarnos con el elemento nuevo, n
                     doublyLinkedListWithTail.pushBack(-1);
                     start = System.nanoTime();
                     x = doublyLinkedListWithTail.popBack();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     doublyLinkedListWithTail.pushFront(-1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     x = doublyLinkedListWithTail.popFront();
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start);
 
                     start = System.nanoTime();
                     DoublyLinkedNode<Integer> doublyLinkedNode = doublyLinkedListWithTail.find(randomItem);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
 
                     start = System.nanoTime();
                     doublyLinkedListWithTail.addBefore(doublyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     doublyLinkedListWithTail.erase(doublyLinkedListWithTail.find(-1));
 
                     start = System.nanoTime();
                     doublyLinkedListWithTail.addAfter(doublyLinkedNode, -1);
                     end = System.nanoTime();
-                    IO.print("%d,".formatted(end - start));
+                    IO.print(end - start + ",");
                     doublyLinkedListWithTail.erase(doublyLinkedListWithTail.find(-1));
 
                     start = System.nanoTime();
                     doublyLinkedListWithTail.erase(doublyLinkedNode);
                     end = System.nanoTime();
-                    IO.println("%d".formatted(end - start));
+                    IO.println(end - start);
 
                     if (randomItem == 0) {
                         doublyLinkedListWithTail.pushFront(0);
@@ -359,7 +360,44 @@ public class App {
                 if (isPowerOfTwo(n)) {
                     IO.println(":" + n);
 
-                    // todo
+                    start = System.nanoTime();
+                    x = queue.isEmpty();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    start = System.nanoTime();
+                    queue.enqueue(n);
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    start = System.nanoTime();
+                    x = queue.dequeue();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+                    queue._addBefore(0, 0);
+
+                    start = System.nanoTime();
+                    x = queue.front();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    start = System.nanoTime();
+                    x = queue.size();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    int randomItem = rng.nextInt(n + 1);
+
+                    start = System.nanoTime();
+                    queue.delete(randomItem);
+                    end = System.nanoTime();
+                    IO.println(end - start);
+
+                    if (randomItem == n) {
+                        queue.enqueue(n);
+                    } else {
+                        queue._addBefore(randomItem, randomItem);
+                    }
 
                     nextPossibleQuick = n * QUICK_FACTOR;
                 } else if ((int) nextPossibleQuick == n) {
