@@ -3,6 +3,7 @@ package example.dontwanttothink;
 import java.util.Random;
 
 import example.dontwanttothink.DynamicArrays.DynamicQueue;
+import example.dontwanttothink.DynamicArrays.DynamicStack;
 import example.dontwanttothink.LinkedLists.DoublyLinkedList;
 import example.dontwanttothink.LinkedLists.DoublyLinkedListWithTail;
 import example.dontwanttothink.LinkedLists.DoublyLinkedNode;
@@ -417,8 +418,66 @@ public class App {
 
     private static void testStack() {
         IO.println("@Pila dinámica");
-        for (int it = 0; it < ITERATIONS; ++it) {
 
+        long start, end;
+        for (int it = 0; it < ITERATIONS; ++it) {
+            DynamicStack<Integer> stack = new DynamicStack<>();
+
+            double nextPossibleQuick = 0;
+
+            IO.println("#Iteración " + it);
+            for (int n = 0; n <= MAXIMUM_N; ++n) {
+                if (isPowerOfTwo(n)) {
+                    IO.println(":" + n);
+
+                    start = System.nanoTime();
+                    x = stack.isEmpty();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    start = System.nanoTime();
+                    stack.push(n);
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    start = System.nanoTime();
+                    x = stack.pop();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+                    stack.push(n);
+
+                    start = System.nanoTime();
+                    x = stack.peek();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    start = System.nanoTime();
+                    x = stack.size();
+                    end = System.nanoTime();
+                    IO.print(end - start + ",");
+
+                    int randomItem = rng.nextInt(n + 1);
+
+                    start = System.nanoTime();
+                    stack.delete(randomItem);
+                    end = System.nanoTime();
+                    IO.println(end - start);
+
+                    stack._addBefore(randomItem, randomItem);
+
+                    nextPossibleQuick = n * QUICK_FACTOR;
+                } else if ((int) nextPossibleQuick == n) {
+                    IO.print(":" + n + "q");
+                    start = System.nanoTime();
+                    stack.push(n);
+                    end = System.nanoTime();
+                    IO.println(end - start);
+
+                    nextPossibleQuick *= QUICK_FACTOR;
+                } else {
+                    stack.push(n);
+                }
+            }
         }
     }
 

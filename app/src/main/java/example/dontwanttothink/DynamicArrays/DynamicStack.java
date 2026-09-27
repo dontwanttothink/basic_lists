@@ -98,4 +98,18 @@ public final class DynamicStack<T> implements MyStack<T> {
 		System.arraycopy(buffer, 0, smallerBuffer, 0, length);
 		buffer = smallerBuffer;
 	}
+
+	/**
+	 * Para las mediciones solamente.
+	 */
+	public void _addBefore(int index, T n) {
+		growBufferIfNeeded();
+
+		for (int i = length; i - 1 >= index; --i) {
+			buffer[i] = buffer[(i - 1) % buffer.length];
+		}
+
+		buffer[index % buffer.length] = n;
+		++length;
+	}
 }
