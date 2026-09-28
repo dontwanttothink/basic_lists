@@ -392,7 +392,7 @@ public class App {
                 }
 
                 nextPossibleQuick = n * QUICK_FACTOR;
-            } else if ((int) nextPossibleQuick == n) {
+            } else if (n < 16 || (int) nextPossibleQuick == n) {
                 IO.print(":" + n + "q");
                 start = System.nanoTime();
                 queue.enqueue(n);
@@ -455,7 +455,7 @@ public class App {
                 stack._addBefore(randomItem, randomItem);
 
                 nextPossibleQuick = n * QUICK_FACTOR;
-            } else if ((int) nextPossibleQuick == n) {
+            } else if (n < 16 || (int) nextPossibleQuick == n) {
                 IO.print(":" + n + "q");
                 start = System.nanoTime();
                 stack.push(n);
